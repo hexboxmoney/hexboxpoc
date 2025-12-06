@@ -28,7 +28,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body className="bg-white dark:bg-dark-bg text-black dark:text-dark-text transition-colors duration-200">
         {/* Google Consent Mode initialization */}
         <Script id="google-consent-mode" strategy="beforeInteractive">
           {`
@@ -43,19 +43,6 @@ export default async function RootLayout({
           `}
         </Script>
 
-        {/*         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-PWL3ZE897B"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-PWL3ZE897B');
-          `}
-        </Script> */}
-
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){
@@ -69,8 +56,7 @@ export default async function RootLayout({
             })(window,document,'script','dataLayer','GTM-5JPDTJB8');
           `}
         </Script>
-      </head>
-      <body className="bg-white dark:bg-dark-bg text-black dark:text-dark-text transition-colors duration-200">
+
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5JPDTJB8"
