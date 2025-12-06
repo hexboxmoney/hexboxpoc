@@ -8,7 +8,7 @@ import Providers from "./components/providers/Providers";
 import Notification from "./components/Notification";
 import CookieConsentBanner from "./components/CookieConsentBanner";
 
-import * as Sentry from '@sentry/nextjs';
+import * as Sentry from "@sentry/nextjs";
 
 // Add or edit your "generateMetadata" to include the Sentry trace data:
 export function generateMetadata(): Metadata {
@@ -16,8 +16,8 @@ export function generateMetadata(): Metadata {
     title: "Hexbox",
     description: "Create. Support. Make Impact.",
     other: {
-      ...Sentry.getTraceData()
-    }
+      ...Sentry.getTraceData(),
+    },
   };
 }
 
@@ -66,14 +66,14 @@ export default async function RootLayout({
               j.async=true;
               j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
               f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-WGRTDFGZ');
+            })(window,document,'script','dataLayer','GTM-5JPDTJB8');
           `}
         </Script>
       </head>
       <body className="bg-white dark:bg-dark-bg text-black dark:text-dark-text transition-colors duration-200">
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WGRTDFGZ"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5JPDTJB8"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
