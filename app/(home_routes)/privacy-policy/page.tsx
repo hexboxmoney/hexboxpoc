@@ -244,7 +244,7 @@ const PrivacyAndPolicy: React.FC = () => {
             <Mail className="w-4 h-4" />
             <a
               href={`mailto:${privacyData.company.email}`}
-              className="text-blueColor hover:text-blueColor/80"
+              className="text-gray-600 hover:text-blueColor dark:text-dark-textMuted dark:hover:text-white transition-colors"
             >
               {privacyData.company.email}
             </a>
@@ -328,7 +328,7 @@ const PrivacyAndPolicy: React.FC = () => {
           For questions regarding this policy, contact us at{" "}
           <a
             href={`mailto:${privacyData.company.email}`}
-            className="text-blueColor hover:text-lightBlueColor"
+            className="text-blueColor hover:text-blueColorDull dark:text-dark-textMuted dark:hover:text-white transition-colors"
           >
             {privacyData.company.email}
           </a>
