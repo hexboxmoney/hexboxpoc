@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import formatPrice from "@/app/utils/formatPrice";
 import { CheckCircle, LockIcon } from "lucide-react";
+import { getCampaignLogoUrl } from "@/app/utils/getImageUrl";
 
 const CampaignItem: React.FC<CampaignItemProps> = ({
   id,
@@ -17,8 +18,7 @@ const CampaignItem: React.FC<CampaignItemProps> = ({
 
   return (
     <li
-      className={`bg-none dark:bg-dark-surface flex flex-col justify-between items-center shadow-sm hover:shadow-lg  hover:shadow-dark-border dark:hover:shadow-textMuted rounded-2xl overflow-hidden transition-shadow duration-150 m-[10px] border-[1px] dark:border-[0.5px] border-dark-border relative
-       `}
+      className={`cursor-pointer bg-white dark:bg-dark-surfaceHover shadow-md rounded-2xl p-4 flex flex-col items-center hover:shadow-lg hover:shadow-dark-border dark:hover:shadow-textMuted  transition-shadow border border-dark-border dark:border-dark-border`}
     >
       <Link className="contents" href={`/campaign?campaignId=${id}`}>
         {isFinalized && (
@@ -30,7 +30,7 @@ const CampaignItem: React.FC<CampaignItemProps> = ({
         <Image
           className="h-[170px] w-full object-contain object-center p-1"
           loading="lazy"
-          src={`${process.env.NEXT_PUBLIC_R2_BUCKET_URL}/campaign_logos/` + logo}
+          src={getCampaignLogoUrl(logo)}
           alt={title}
           width={100}
           height={70}

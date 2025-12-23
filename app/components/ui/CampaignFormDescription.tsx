@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { campaignFormDescription } from "@/app/utils/campaignFormDescriptionHelper";

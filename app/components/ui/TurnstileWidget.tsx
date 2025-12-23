@@ -1,3 +1,5 @@
+"use client";
+
 // components/ui/TurnstileWidget.tsx
 import React from "react";
 import { useTurnstile } from "@/hooks/useTurnstile";

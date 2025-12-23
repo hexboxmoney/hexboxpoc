@@ -7,6 +7,7 @@ import { MoveRight } from "lucide-react";
 import ReactConfetti from "react-confetti";
 import ShareButton from "@/app/components/ui/ShareButton";
 import { apiFetch } from "@/app/utils/api-client";
+import { getCampaignLogoUrl } from "@/app/utils/getImageUrl";
 export default function ThankYou() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -89,7 +90,7 @@ export default function ThankYou() {
       <div className="max-w-2xl w-full bg-white dark:bg-dark-surface rounded-xl shadow-sm p-8 text-center">
         <div className="relative w-56 h-56 mx-auto mb-6">
           <Image
-            src={`${process.env.NEXT_PUBLIC_R2_BUCKET_URL}/campaign_logos/${campaign.logo}`}
+            src={getCampaignLogoUrl(campaign.logo)}
             alt="Campaign Logo"
             fill
             className="object-contain"

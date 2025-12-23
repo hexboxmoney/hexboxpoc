@@ -1,3 +1,5 @@
+"use client";
+
 import CustomButton from "./CustomButton";
 
 export const ErrorMessage = ({

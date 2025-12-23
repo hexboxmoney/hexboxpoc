@@ -7,6 +7,7 @@ import { CampaignListProps } from "@/app/types";
 import Image from "next/image";
 import CustomButton from "@/app/components/ui/CustomButton";
 import Link from "next/link";
+import { getCampaignLogoUrl } from "@/app/utils/getImageUrl";
 
 export default function FeaturedCampaigns({ listings }: CampaignListProps) {
   const topCampaigns = listings.slice(0, 3);
@@ -210,10 +211,7 @@ export default function FeaturedCampaigns({ listings }: CampaignListProps) {
                         <Image
                           className="h-full w-full object-contain object-center p-2"
                           loading="lazy"
-                          src={
-                            `${process.env.NEXT_PUBLIC_R2_BUCKET_URL}/campaign_logos/` +
-                            campaign.logo
-                          }
+                          src={getCampaignLogoUrl(campaign.logo)}
                           alt={campaign.title}
                           width={300}
                           height={400}

@@ -14,6 +14,7 @@ import remarkGfm from "remark-gfm";
 import TurnstileWidget from "../ui/TurnstileWidget";
 import LocationAutocomplete from "../ui/LocationAutocomplete";
 import { inputClass, textareaClass, checkClass } from "../../utils/formClasses";
+import { getCampaignLogoUrl } from "@/app/utils/getImageUrl";
 
 import { FundsManagement } from "../../types";
 
@@ -52,7 +53,8 @@ const fileSizeValidator = Yup.mixed().test(
     return false;
   }
 );
-const BASE_URL = `${process.env.NEXT_PUBLIC_R2_BUCKET_URL}/campaign_logos/`;
+const R2_BUCKET_URL = process.env.NEXT_PUBLIC_R2_BUCKET_URL || '';
+const BASE_URL = R2_BUCKET_URL ? `${R2_BUCKET_URL}/campaign_logos/` : '';
 
 // Extended validation schema that includes turnstile verification
 const validationCombinedSchema = Yup.object({

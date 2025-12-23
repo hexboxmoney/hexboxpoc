@@ -21,6 +21,7 @@ import ShareButton from "../ui/ShareButton";
 import CampaignComments from "../ui/CampaignComments";
 import WithdrawFundsButton from "./WithdrawFundsButton";
 import { FundingType } from "@/app/types";
+import { getCampaignLogoUrl } from "@/app/utils/getImageUrl";
 
 const CampaignDetails: React.FC<CampaignDetailsProps> = async ({
   _id,
@@ -161,7 +162,7 @@ const CampaignDetails: React.FC<CampaignDetailsProps> = async ({
 
           <div className="col-span-1 flex flex-col items-center justify-end ">
             <HexagonImage
-              src={`${process.env.NEXT_PUBLIC_R2_BUCKET_URL}/campaign_logos/` + logo}
+              src={getCampaignLogoUrl(logo)}
               alt="demo"
               className="my-4 "
             />

@@ -1,3 +1,27 @@
+// Helper to get the base URL for API calls
+const getBaseUrl = () => {
+  // For server-side, use NEXTAUTH_URL or NEXT_PUBLIC_APP_BASE_URL
+  // For client-side or when not set, return empty string for relative URLs
+  return process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_APP_BASE_URL || '';
+};
+
+// Helper to build URL with query params (handles relative URLs)
+const buildUrlWithParams = (path: string, params: Record<string, string>): string => {
+  const baseUrl = getBaseUrl();
+  const searchParams = new URLSearchParams(params);
+  
+  if (baseUrl) {
+    const url = new URL(path, baseUrl);
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) url.searchParams.append(key, value);
+    });
+    return url.toString();
+  }
+  
+  // For relative URLs
+  const queryString = searchParams.toString();
+  return queryString ? `${path}?${queryString}` : path;
+};
 
 export const fetchCampaignsWithCount = async (
   limit: number,
@@ -9,21 +33,20 @@ export const fetchCampaignsWithCount = async (
 ): Promise<{ campaigns: any[]; total: number }> => {
   try {
     console.log("fetchCampaignsWithCount | apiHelpers | utils");
-    console.log(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/getCampaigns`);
-    const url = new URL(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/getCampaigns`);
-    url.searchParams.append("limit", limit.toString());
-    url.searchParams.append("skip", skip.toString());
-    url.searchParams.append("sortBy", sortBy);
-    url.searchParams.append("sortOrder", sortOrder);
+    
+    const params: Record<string, string> = {
+      limit: limit.toString(),
+      skip: skip.toString(),
+      sortBy,
+      sortOrder,
+    };
+    if (status) params.status = status;
+    if (query) params.query = query;
+    
+    const url = buildUrlWithParams('/api/getCampaigns', params);
+    console.log(`Fetching from: ${url}`);
 
-    if (status) {
-      url.searchParams.append("status", status);
-    }
-    if (query) {
-      url.searchParams.append("query", query);
-    }
-
-    const response = await fetch(url.toString(), {
+    const response = await fetch(url, {
       cache: "no-store",
     });
 
@@ -64,22 +87,20 @@ export const fetchCampaigns = async (
 ): Promise<any> => {
   try {
     console.log("fetchCampaigns | apiHelpers | utils");
-    console.log(`${process.env.NEXTAUTH_URL}/api/getCampaigns`);
-    const url = new URL(`${process.env.NEXTAUTH_URL}/api/getCampaigns`);
-    url.searchParams.append("limit", limit.toString());
-    url.searchParams.append("skip", skip.toString());
-    url.searchParams.append("sortBy", sortBy);
-    url.searchParams.append("sortOrder", sortOrder);
+    
+    const params: Record<string, string> = {
+      limit: limit.toString(),
+      skip: skip.toString(),
+      sortBy,
+      sortOrder,
+    };
+    if (status) params.status = status;
+    if (query) params.query = query;
+    
+    const url = buildUrlWithParams('/api/getCampaigns', params);
+    console.log(`Fetching from: ${url}`);
 
-    if (status) {
-      url.searchParams.append("status", status);
-    }
-
-    if (query) {
-      url.searchParams.append("query", query);
-    }
-
-    const response = await fetch(url.toString(), {
+    const response = await fetch(url, {
       cache: "no-store",
     });
 
@@ -118,7 +139,10 @@ export const fetchCampaigns = async (
   }
 };
 export const fetchCampaignsByUser = async (userId: string): Promise<any> => {
-  const response = await fetch(`/api/userCampaigns?userId=${userId}`, {
+  const url = buildUrlWithParams('/api/userCampaigns', { userId });
+  console.log(`Fetching user campaigns from: ${url}`);
+  
+  const response = await fetch(url, {
     cache: "no-store",
   });
 
@@ -134,13 +158,12 @@ export const fetchSingleCampaign = async (campaignId: string): Promise<any> => {
 
   try {
     console.log("fetchSingleCampaign | apiHelpers | utils");
-    console.log(`${process.env.NEXTAUTH_URL}/api/getCampaign?campaignId=${campaignId}`);
-    const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/getCampaign?campaignId=${campaignId}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const url = buildUrlWithParams('/api/getCampaign', { campaignId });
+    console.log(`Fetching from: ${url}`);
+    
+    const response = await fetch(url, {
+      cache: "no-store",
+    });
     return response.json();
   } catch (error) {
     console.log(

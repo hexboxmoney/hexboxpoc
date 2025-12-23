@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { ProductFetch } from "@/app/types";
 import { useRouter } from "next/navigation";
-import { log } from "console";
+import { getProductLogoUrl } from "@/app/utils/getImageUrl";
 
 const ProductCard: React.FC<ProductFetch> = ({
   id,
@@ -22,7 +22,7 @@ const ProductCard: React.FC<ProductFetch> = ({
     >
       <div className="relative w-28 h-28 mb-4">
         <Image
-          src={`${process.env.NEXT_PUBLIC_R2_BUCKET_URL}/product_logos/${logo}`}
+          src={getProductLogoUrl(logo)}
           alt={name}
           fill
           sizes="112px"
