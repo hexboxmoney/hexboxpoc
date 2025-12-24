@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import About from "../components/About";
 import AnalyticsBanner from "../components/AnalyticsBanner";
 import CampaignList from "../components/campaign/CampaignList";
@@ -6,11 +7,46 @@ import Funnel from "../components/ui/Funnel";
 import { fetchCampaigns } from "../utils/apiHelpers";
 import FeaturedCampaigns from "../components/FeaturedCampaigns";
 import AnnouncementBanner from "../components/ui/AnnouncementBanner";
+import { WebsiteJsonLd } from "../components/seo/StructuredData";
+
+export const metadata: Metadata = {
+  title: "Hexbox | Blockchain Crowdfunding Platform on Avalanche",
+  description:
+    "Launch or back blockchain-powered campaigns on Avalanche C-Chain. Hexbox offers smart contract escrow, NFT-backed investments, and refundable crowdfunding for real-world innovation.",
+  keywords: [
+    "blockchain crowdfunding",
+    "avalanche crowdfunding",
+    "crypto fundraising",
+    "web3 crowdfunding platform",
+    "decentralized fundraising",
+    "NFT crowdfunding",
+    "smart contract funding",
+    "crypto project funding",
+    "avalanche c-chain",
+    "hexbox",
+  ],
+  openGraph: {
+    title: "Hexbox | Blockchain Crowdfunding Platform on Avalanche",
+    description:
+      "Launch or back blockchain-powered campaigns. Smart contract escrow, NFT-backed investments, and refundable crowdfunding for real-world innovation.",
+    url: "https://hexbox.money",
+    type: "website",
+  },
+  twitter: {
+    title: "Hexbox | Blockchain Crowdfunding on Avalanche",
+    description:
+      "Launch or back blockchain-powered campaigns. Smart contract escrow, NFT-backed investments, and refundable crowdfunding.",
+  },
+  alternates: {
+    canonical: "https://hexbox.money",
+  },
+};
 
 export default async function Home() {
   const campaigns = await fetchCampaigns(4, 0);
   return (
     <>
+      <WebsiteJsonLd />
       <AnnouncementBanner />
       <main className="py-4 space-y-4">
         <div className="max-w-2xl lg:max-w-6xl mx-auto ">
